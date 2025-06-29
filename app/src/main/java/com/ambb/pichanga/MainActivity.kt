@@ -93,12 +93,20 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                fun popToRoot(stack: MutableList<NavKey>) {
+                    if (stack.isEmpty()) return
+                    stack.subList(1, stack.size).clear()
+                }
+
                 fun switchTab(newTab: BottomNavItem) {
-                    if (currentTab.value == newTab) return
-                    if (tabHistory.lastOrNull() != currentTab.value) {
-                        tabHistory.add(currentTab.value)
+                    if (currentTab.value == newTab) {
+                        tabBackStacks[newTab]?.let { popToRoot(it) }
+                    } else {
+                        if (tabHistory.lastOrNull() != currentTab.value) {
+                            tabHistory.add(currentTab.value)
+                        }
+                        currentTab.value = newTab
                     }
-                    currentTab.value = newTab
                 }
 
                 BackHandler {
