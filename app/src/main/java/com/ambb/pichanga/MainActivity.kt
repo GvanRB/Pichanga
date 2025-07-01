@@ -35,6 +35,7 @@ import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.ambb.pichanga.screen.DetailScreen
+import com.ambb.pichanga.screen.DetailScreen2
 import com.ambb.pichanga.screen.HomeScreen
 import com.ambb.pichanga.screen.MyTeamScreen
 import com.ambb.pichanga.screen.PickUpGameScreen
@@ -67,6 +68,9 @@ data object MyTeam : NavKey, BottomNavItem {
 
 @Serializable
 data class Detail(val name: String) : NavKey
+
+@Serializable
+data class Detail2(val name: String) : NavKey
 
 
 class MainActivity : ComponentActivity() {
@@ -166,6 +170,15 @@ class MainActivity : ComponentActivity() {
                             }
                             entry<Detail> { args ->
                                 DetailScreen(
+                                    onBackClick = { backStack.removeLastOrNull() },
+                                    modifier = screenModifier,
+                                    title = args.name
+                                ) {
+                                    backStack.add(Detail2(name = "My Home Detail2 screen"))
+                                }
+                            }
+                            entry<Detail2> { args ->
+                                DetailScreen2(
                                     onBackClick = { backStack.removeLastOrNull() },
                                     modifier = screenModifier,
                                     title = args.name

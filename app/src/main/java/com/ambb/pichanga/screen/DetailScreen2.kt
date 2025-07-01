@@ -23,11 +23,11 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(
+fun DetailScreen2(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     title: String,
-    onMyDetail2: () -> Unit
+    onMyTeamClick: () -> Unit
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         TopAppBar(
@@ -55,7 +55,7 @@ fun DetailScreen(
         ) {
             Text(text = title)
             Spacer(Modifier.padding(16.dp))
-            Button(onMyDetail2) { Text("Ir a Detail2") }
+            Button(onMyTeamClick) { Text("Ir a MyTeam") }
         }
     }
 }
